@@ -16,4 +16,6 @@ app.get("/", (req, res) => {
 res.send("Hello Express");
 });
 // Mendefinisikan port.
-app.listen(3000);
+app.listen(3000, () => {
+console.log("Server berjalan pada localhost:3000");
+});
