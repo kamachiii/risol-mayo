@@ -1,11 +1,14 @@
 const mysql = require('mysql2');
+require('dotenv').config();
+
+const env = process.env;
 
 // buat koneksi ke database
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'risol_mayo'
+    host: env.DB_HOST || 'localhost',
+    user: env.DB_USER || 'root',
+    password: env.DB_PASS || '',
+    database: env.DB_NAME || 'risol_mayo'
 });
 
 db.connect((err) => {
