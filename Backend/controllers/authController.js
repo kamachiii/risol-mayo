@@ -53,4 +53,9 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { login, register };
+// LOGOUT
+const logout = (req, res) => {
+  res.json({ message: "Logout berhasil" });
+};
+
+module.exports = { login, register, logout };

@@ -8,6 +8,7 @@ const verifyToken = require("../middleware/authMiddleware");
 // AUTH
 router.post("/register", AuthController.register);
 router.post("/login", AuthController.login);
+router.post("/logout", verifyToken, AuthController.logout);
 
 // PRODUCTS (pakai token)
 router.get("/products", verifyToken, ProductController.getAllProducts);
