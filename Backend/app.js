@@ -1,21 +1,16 @@
-//import express
 const express = require("express");
-// Membuat object express
+const apiRoutes = require("./routes/api");
+
 const app = express();
-/*
-Membuat routing.
-Method get menerima 2 params.
-*
-*
-*
-* Param 2 callback.
-Param 1 adalah endpoint.
-* Callback menerima object req dan res
-*/
+
+app.use(express.json());
+app.use("/api", apiRoutes);
+
+// Health check
 app.get("/", (req, res) => {
-res.send("Hello Express");
+  res.json({ message: "Server berjalan" });
 });
-// Mendefinisikan port.
+
 app.listen(3000, () => {
-console.log("Server berjalan pada localhost:3000");
+  console.log("Server berjalan pada localhost:3000");
 });
