@@ -13,10 +13,10 @@ const getAllUsers = (req, res) => {
 
 // POST create user
 const createUser = (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
 
-  const sql = "INSERT INTO users (name, email) VALUES (?, ?)";
-  db.query(sql, [name, email], (err, result) => {
+  const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+  db.query(sql, [name, email, password], (err, result) => {
     if (err) {
       console.error("DB error on createUser:", err);
       return res.status(500).json({ message: "Terjadi kesalahan pada server" });
@@ -28,7 +28,7 @@ const createUser = (req, res) => {
 // PUT update user
 const updateUser = (req, res) => {
   const { id } = req.params;
-  const { name, email } = req.body;
+  const { name, email, } = req.body;
 
   const sql = "UPDATE users SET name=?, email=? WHERE id=?";
   db.query(sql, [name, email, id], (err, result) => {
