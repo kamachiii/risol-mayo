@@ -2,7 +2,7 @@ const db = require("../config/database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const SECRET_KEY = "hakim_secret";
+const SECRET_KEY = process.env.JWT_SECRET || "hakim_secret";
 
 // LOGIN
 const login = (req, res) => {
@@ -10,7 +10,10 @@ const login = (req, res) => {
 
   const sql = "SELECT * FROM users WHERE email=?";
   db.query(sql, [email], async (err, results) => {
-    if (err) return res.status(500).json(err);
+    if (err) {
+      console.error("DB error on login:", err);
+      return res.status(500).json({ message: "Terjadi kesalahan pada server" });
+    }
 
     if (results.length === 0) {
       return res.status(404).json({ message: "User tidak ditemukan" });
@@ -44,12 +47,16 @@ const register = async (req, res) => {
 
     const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
     db.query(sql, [name, email, hashedPassword], (err, result) => {
-      if (err) return res.status(500).json(err);
+      if (err) {
+        console.error("DB error on register:", err);
+        return res.status(500).json({ message: "Terjadi kesalahan pada server" });
+      }
 
       res.json({ message: "Register berhasil" });
     });
   } catch (error) {
-    res.status(500).json(error);
+    console.error("Register error:", error);
+    res.status(500).json({ message: "Terjadi kesalahan pada server" });
   }
 };
 

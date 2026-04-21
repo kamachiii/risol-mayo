@@ -1,13 +1,18 @@
 const jwt = require("jsonwebtoken");
 
-const SECRET_KEY = "hakim_secret";
+const SECRET_KEY = process.env.JWT_SECRET || "hakim_secret";
 
 const verifyToken = (req, res, next) => {
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
 
-  if (!token) {
-    return res.status(403).json({ message: "Token diperlukan" });
+  if (!authHeader) {
+    return res.status(401).json({ message: "Token diperlukan" });
   }
+
+  // Support both "Bearer <token>" and raw token
+  const token = authHeader.startsWith("Bearer ")
+    ? authHeader.slice(7)
+    : authHeader;
 
   jwt.verify(token, SECRET_KEY, (err, decoded) => {
     if (err) {
@@ -20,3 +25,4 @@ const verifyToken = (req, res, next) => {
 };
 
 module.exports = verifyToken;
+
