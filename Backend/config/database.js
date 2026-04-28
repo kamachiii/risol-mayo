@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 
 // const env = process.env;
 
-// buat koneksi ke database
+// buat koneksi ke database MySQL
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
