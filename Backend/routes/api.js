@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const AuthController = require("../controllers/authController");
-const ProductController = require("../controllers/productController");
+const ProductController = require("../controllers/ProductController");
 const UserController = require("../controllers/userController");
 const CartController = require("../controllers/cartController");
 const verifyToken = require("../middleware/authMiddleware");
@@ -13,10 +13,11 @@ router.post("/login", AuthController.login);
 router.post("/logout", verifyToken, AuthController.logout);
 
 // PRODUCTS (protected)
-router.get("/products", verifyToken, ProductController.getAllProducts);
-router.post("/products", verifyToken, ProductController.createProduct);
-router.put("/products/:id", verifyToken, ProductController.updateProduct);
-router.delete("/products/:id", verifyToken, ProductController.deleteProduct);
+router.get("/products", verifyToken, ProductController.index);
+router.get("/products/:id", verifyToken, ProductController.show);
+router.post("/products", verifyToken, ProductController.store);
+router.put("/products/:id", verifyToken, ProductController.update);
+router.delete("/products/:id", verifyToken, ProductController.destroy);
 
 // USERS (protected)
 router.get("/users", verifyToken, UserController.getAllUsers);
