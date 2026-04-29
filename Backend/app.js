@@ -1,25 +1,16 @@
-const express = require("express"); //import express
-const app = express(); // Membuat object express
+const express = require("express");
+const apiRoutes = require("./routes/api");
 
-const userController = require("./controllers/userController.js");
+const app = express();
 
+app.use(express.json());
+app.use("/api", apiRoutes);
+
+// Health check
 app.get("/", (req, res) => {
-res.send("Hello World");
+  res.json({ message: "Server berjalan" });
 });
 
-
-// routing untuk users
-app.get("/users", userController.index);
-
-app.post("/users", userController.store);
-
-app.put("/users/:id", userController.update);
-
-app.delete("/users/:id", userController.destroy);
-
-
-
-// Mendefinisikan port.
 app.listen(3000, () => {
-console.log("Server berjalan pada localhost:3000");
+  console.log("Server berjalan pada localhost:3000");
 });
