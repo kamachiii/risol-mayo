@@ -100,12 +100,17 @@ const updateItem = (req, res) => {
       .json({ message: "quantity harus berupa angka positif" });
   }
 
-  // Scope by user_id to prevent users from updating another user's cart item
+  const userId = req.user.id;
+
   const sql = "UPDATE cart_items SET quantity = ? WHERE id = ? AND user_id = ?";
-  db.query(sql, [qty, id, userId], (err, result) => {
+  db.query(sql, [quantity, id, userId], (err, result) => {
     if (err) {
       console.error("DB error on updateItem:", err);
       return res.status(500).json({ message: "Gagal memperbarui jumlah" });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
     }
     if (result.affectedRows === 0) {
       return res
