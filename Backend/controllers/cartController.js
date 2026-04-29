@@ -108,6 +108,9 @@ const updateItem = (req, res) => {
       console.error("DB error on updateItem:", err);
       return res.status(500).json({ message: "Gagal memperbarui jumlah" });
     }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
+    }
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
