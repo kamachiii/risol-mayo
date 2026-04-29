@@ -126,12 +126,17 @@ const deleteItem = (req, res) => {
   const userId = req.user.id;
   const { id } = req.params;
 
-  // Scope by user_id to prevent users from deleting another user's cart item
+  const userId = req.user.id;
+
   const sql = "DELETE FROM cart_items WHERE id = ? AND user_id = ?";
   db.query(sql, [id, userId], (err, result) => {
     if (err) {
       console.error("DB error on deleteItem:", err);
       return res.status(500).json({ message: "Gagal menghapus item" });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Item tidak ditemukan atau tidak diizinkan" });
     }
     if (result.affectedRows === 0) {
       return res
