@@ -117,6 +117,7 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `cart_items`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `uq_user_product` (`user_id`, `product_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `product_id` (`product_id`);
 
