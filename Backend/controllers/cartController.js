@@ -48,8 +48,9 @@ const addItem = (req, res) => {
   const { product_id, quantity } = req.body;
 
   // Input validation
-  if (!product_id) {
-    return res.status(400).json({ message: "product_id diperlukan" });
+  const pid = parseInt(product_id, 10);
+  if (!product_id || isNaN(pid) || pid <= 0) {
+    return res.status(400).json({ message: "product_id harus berupa angka positif" });
   }
   if (quantity === undefined || quantity === null) {
     return res.status(400).json({ message: "quantity diperlukan" });
@@ -70,7 +71,7 @@ const addItem = (req, res) => {
     ON DUPLICATE KEY UPDATE quantity = quantity + ?
   `;
 
-  db.query(sql, [userId, product_id, qty, qty], (err, result) => {
+  db.query(sql, [userId, pid, qty, qty], (err, result) => {
     if (err) {
       console.error("DB error on addItem:", err);
       return res
@@ -100,25 +101,14 @@ const updateItem = (req, res) => {
       .json({ message: "quantity harus berupa angka positif" });
   }
 
-  const userId = req.user.id;
-
   const sql = "UPDATE cart_items SET quantity = ? WHERE id = ? AND user_id = ?";
-  db.query(sql, [quantity, id, userId], (err, result) => {
+  db.query(sql, [qty, id, userId], (err, result) => {
     if (err) {
       console.error("DB error on updateItem:", err);
       return res.status(500).json({ message: "Gagal memperbarui jumlah" });
     }
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
-    }
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
-    }
-    if (result.affectedRows === 0) {
-      return res
-        .status(404)
-        .json({ message: "Item tidak ditemukan atau bukan milik Anda" });
     }
     res.json({ status: "success", message: "Jumlah berhasil diperbarui" });
   });
@@ -128,8 +118,6 @@ const updateItem = (req, res) => {
 const deleteItem = (req, res) => {
   const userId = req.user.id;
   const { id } = req.params;
-
-  const userId = req.user.id;
 
   const sql = "DELETE FROM cart_items WHERE id = ? AND user_id = ?";
   db.query(sql, [id, userId], (err, result) => {
@@ -144,11 +132,6 @@ const deleteItem = (req, res) => {
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Item tidak ditemukan atau tidak diizinkan" });
-    }
-    if (result.affectedRows === 0) {
-      return res
-        .status(404)
-        .json({ message: "Item tidak ditemukan atau bukan milik Anda" });
     }
     res.json({ status: "success", message: "Item dihapus dari keranjang" });
   });
