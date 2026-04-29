@@ -139,6 +139,10 @@ const deleteItem = (req, res) => {
     }
 
     if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Item keranjang tidak ditemukan" });
+    }
+
+    if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Item tidak ditemukan atau tidak diizinkan" });
     }
     if (result.affectedRows === 0) {
