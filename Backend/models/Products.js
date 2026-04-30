@@ -1,6 +1,6 @@
 const db = require("../config/database");
 
-class Product {
+class Products {
     static getAll(callback) {
         const sql = "SELECT * FROM products";
         db.query(sql, callback);
@@ -13,21 +13,29 @@ class Product {
 
     // create model data
     static create(data, callback) {
-        const sql = `INSERT INTO products (name, price, description) VALUES (?, ?, ?)`;
+        const sql = `
+        INSERT INTO products (category_id, name, price, description, stock, image_url) 
+        VALUES (?, ?, ?, ?, ?, ?)
+        `;
         db.query(sql, [
+            data.category_id,
             data.name,
             data.price,
-            data.description
+            data.description,
+            data.stock,
+            data.image_url
         ], callback);
     }
     
     // update model data
     static update(id, data, callback) {
-        const sql = `UPDATE products SET name=?, price=?, description=? WHERE id=?`;
+        const sql = `UPDATE products SET category_id=?, name=?, price=?, description=?, stock=? WHERE id=?`;
         db.query(sql, [
+            data.category_id,
             data.name,
             data.price,
             data.description,
+            data.stock,
             id
         ], callback);
     }
@@ -39,4 +47,4 @@ class Product {
     }
 }
 
-module.exports = Product;
+module.exports = Products;

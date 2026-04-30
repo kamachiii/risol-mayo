@@ -6,6 +6,7 @@ const ProductController = require("../controllers/ProductController");
 const UserController = require("../controllers/userController");
 const CartController = require("../controllers/cartController");
 const verifyToken = require("../middleware/authMiddleware");
+const upload = require("../middleware/upload");
 
 // AUTH (public)
 router.post("/register", AuthController.register);

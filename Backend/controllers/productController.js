@@ -1,4 +1,5 @@
 const Product = require("../models/Products");
+const validateFile = require("../utils/validator");
 
 class ProductController {
 
@@ -33,9 +34,17 @@ class ProductController {
   // CREATE
   store(req, res) {
     const data = req.body;
+    
+    // validasi untuk upload file
+    const fileError = validateFile(req.file);
+    if(fileError) {
+      return res.json({message: fileError});
+    }
+    data.image_url = req.file.filename;
+
     Product.create(data, (err) => {
       if(err){
-         return res.json({message: "Data gagal ditambahkan"});
+        return res.json({message: "Data gagal ditambahkan"});
       }
       res.json({
         message: "Data berhasil ditambah",
@@ -48,6 +57,15 @@ class ProductController {
   update(req, res) {
     const {id} = req.params;
     const data = req.body;
+
+    // validasi untuk upload file
+    if(req.file) {
+      const fileError = validateFile(req.file);
+      if(fileError) {
+        return res.json({message: fileError});
+      }
+    }
+    data.image_url = req.file ? req.file.filename : null;
 
     Product.update(id, data, (err) => {
       if(err){
