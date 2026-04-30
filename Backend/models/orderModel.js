@@ -59,18 +59,6 @@ const OrderModel = {
     db.query(sql, [orderId], cb);
   },
 
-  getProductsByIds(productIds, cb) {
-  // productIds: [1,2,3]
-  if (!productIds || productIds.length === 0) return cb(null, []);
-
-  const sql = `
-    SELECT id, price, stock, name
-    FROM products
-    WHERE id IN (?)
-  `;
-  db.query(sql, [productIds], cb);
-},
-
 getProductsForUpdate(conn, productIds, cb) {
     if (!productIds || productIds.length === 0) return cb(null, []);
     const sql = `
@@ -82,43 +70,10 @@ getProductsForUpdate(conn, productIds, cb) {
     conn.query(sql, [productIds], cb);
   },
 
-insertItemsComputed(orderId, computedItems, cb) {
-  // computedItems: [{ product_id, quantity, price_at_purchase }]
-  const sql =
-    "INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ?";
-  const values = computedItems.map((item) => [
-    orderId,
-    item.product_id,
-    item.quantity,
-    item.price_at_purchase,
-  ]);
-  db.query(sql, [values], cb);
-},
-
-  // USER: POST create order header
-  create(userId, totalAmount, shippingAddress, cb) {
-    const sql =
-      "INSERT INTO orders (user_id, total_amount, shipping_address) VALUES (?, ?, ?)";
-    db.query(sql, [userId, totalAmount, shippingAddress], cb);
-  },
-
   createOrder(conn, userId, totalAmount, shippingAddress, cb) {
     const sql =
       "INSERT INTO orders (user_id, total_amount, shipping_address) VALUES (?, ?, ?)";
     conn.query(sql, [userId, totalAmount, shippingAddress], cb);
-  },
-
-  // USER: POST bulk insert items
-  insertItems(orderId, items, cb) {
-    const sql =
-      "INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES ?";
-    const values = items.map((item) => [
-      orderId,
-      item.product_id,
-      item.quantity,
-      item.price_at_purchase,
-    ]);
-    db.query(sql, [values], cb);
   },
 
   insertOrderItems(conn, orderId, items, cb) {
