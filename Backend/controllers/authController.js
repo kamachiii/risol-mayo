@@ -27,7 +27,7 @@ const login = (req, res) => {
       return res.status(401).json({ message: "Password salah" });
     }
 
-    const token = jwt.sign({ id: user.id }, SECRET_KEY, {
+    const token = jwt.sign({ id: user.id, role: user.role, email: user.email }, SECRET_KEY, {
       expiresIn: "1h",
     });
 
