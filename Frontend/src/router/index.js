@@ -97,14 +97,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  if (to.meta.requiresAuth) {
-    const auth = useAuthStore()
-    if (!auth.isLoggedIn) {
-      return { name: 'login', query: { redirect: to.fullPath } }
-    }
-    if (to.meta.requiresAdmin && !auth.isAdmin) {
-      return { name: 'home' }
-    }
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isLoggedIn) {
+    return { name: 'login', query: { redirect: to.fullPath } }
+  }
+  if (to.meta.requiresAdmin && !auth.isAdmin) {
+    return { name: 'home' }
+  }
+  // Admin only can access admin pages
+  if (auth.isAdmin && !to.meta.requiresAdmin && to.name !== 'login' && to.name !== 'not-found') {
+    return { name: 'admin' }
   }
 })
 

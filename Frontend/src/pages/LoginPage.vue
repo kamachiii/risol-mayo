@@ -18,7 +18,8 @@ const handleLogin = async () => {
   try {
     const result = await auth.login(form.value.email, form.value.password)
     if (result.success) {
-      const redirect = route.query.redirect || '/'
+      // Admin → always /admin, customer → redirect param or /
+      const redirect = auth.isAdmin ? '/admin' : (route.query.redirect || '/')
       router.push(redirect)
     } else {
       error.value = result.message || 'Email atau password salah'
