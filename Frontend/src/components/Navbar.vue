@@ -199,7 +199,10 @@ const handleLogout = () => {
   padding: 4px;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,.06);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
+.admin-nav::-webkit-scrollbar { display: none; }
 .admin-nav-link {
   display: flex;
   align-items: center;
@@ -426,7 +429,7 @@ const handleLogout = () => {
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
-  .navbar-inner { padding: 0 12px; }
+  .navbar-inner { padding: 0 12px; grid-template-columns: 1fr auto; }
   .navbar-search {
     position: fixed;
     bottom: 0;
@@ -438,6 +441,9 @@ const handleLogout = () => {
     padding: 10px 16px;
     max-width: none;
   }
+  .admin-nav { gap: 0; padding: 2px; }
+  .admin-nav-link { padding: 6px 10px; font-size: 12px; gap: 4px; }
+  .admin-nav-link svg { width: 14px; height: 14px; }
   .p-name { display: none; }
   .p-chevron { display: none; }
   .profile-pill { padding: 5px; position: relative; }

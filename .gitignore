@@ -25,3 +25,8 @@ uploads/*
 !uploads/.gitkeep
 
 _tmp*.txt
+
+_nav*.txt
+_navcss*.txt
+_navend.txt
+_navmedia.txt
