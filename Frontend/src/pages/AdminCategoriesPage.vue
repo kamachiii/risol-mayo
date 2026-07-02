@@ -112,15 +112,9 @@ onMounted(fetchCategories)
 
 <template>
   <div class="admin-page">
-116|    <div class="admin-top">
-      <div class="admin-tabs">
-        <router-link to="/admin" class="admin-tab">Pesanan</router-link>
-        <router-link to="/admin/products" class="admin-tab">Produk</router-link>
-        <router-link to="/admin/users" class="admin-tab">User</router-link>
-        <router-link to="/admin/categories" class="admin-tab active">Kategori</router-link>
-      </div>
+    <div class="admin-top">
     </div>
-126|
+
     <!-- Header -->
     <div class="admin-header">
       <div>
@@ -213,15 +207,7 @@ onMounted(fetchCategories)
 
 <style scoped>
 .admin-page { padding: 24px; max-width: 1100px; margin: 0 auto; }
-220|.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
-.admin-tabs { display: flex; gap: 4px; background: var(--border-light); padding: 4px; border-radius: 10px; }
-.admin-tab {
-  padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  text-decoration: none; color: var(--text-muted); transition: all 0.15s;
-}
-.admin-tab:hover { color: var(--text-secondary); }
-.admin-tab.active, .admin-tab.router-link-exact-active { background: #fff; color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-230|
+.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
 .admin-header {
   display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;
 }
@@ -308,9 +294,7 @@ onMounted(fetchCategories)
 
 @media (max-width: 768px) {
   .admin-page { padding: 16px 12px; }
-318|  .admin-tabs { overflow-x: auto; }
-  .admin-tab { white-space: nowrap; font-size: 12px; padding: 6px 10px; }
-322|  .admin-header h1 { font-size: 18px; }
+  .admin-header h1 { font-size: 18px; }
   .cat-grid { grid-template-columns: 1fr; }
 }
 </style>

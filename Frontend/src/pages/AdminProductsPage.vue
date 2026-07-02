@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from '@/composables/useToast'
-import api, { getImageUrl } from '@/services/api'
+import api from '@/services/api'
 
 const auth = useAuthStore()
 const toast = useToast()
@@ -82,7 +82,7 @@ const openEdit = (p) => {
     stock: p.stock,
     category_id: p.category_id
   }
-  imagePreview.value = p.image_url ? getImageUrl(p.image_url) : ''
+  imagePreview.value = p.image_url ? `${p.image_url}` : ''
   formImage.value = null
   errorMsg.value = ''
   showModal.value = true
@@ -194,15 +194,9 @@ const fmtPrice = (n) => 'Rp ' + Number(n).toLocaleString('id-ID')
 
 <template>
   <div class="admin-page">
-198|    <div class="admin-top">
-      <div class="admin-tabs">
-        <router-link to="/admin" class="admin-tab">Pesanan</router-link>
-        <router-link to="/admin/products" class="admin-tab active">Produk</router-link>
-        <router-link to="/admin/users" class="admin-tab">User</router-link>
-        <router-link to="/admin/categories" class="admin-tab">Kategori</router-link>
-      </div>
+    <div class="admin-top">
     </div>
-208|    <div class="admin-header">
+    <div class="admin-header">
       <div>
         <h1>Produk</h1>
         <p class="header-sub">Kelola produk minimarket</p>
@@ -231,7 +225,7 @@ const fmtPrice = (n) => 'Rp ' + Number(n).toLocaleString('id-ID')
         <tbody>
           <tr v-for="p in paginatedProducts" :key="p.id">
             <td>
-              <img v-if="p.image_url" :src="getImageUrl(p.image_url)" class="thumb" :alt="p.name" />
+              <img v-if="p.image_url" :src="`${p.image_url}`" class="thumb" :alt="p.name" />
               <div v-else class="no-img">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               </div>
@@ -322,13 +316,9 @@ const fmtPrice = (n) => 'Rp ' + Number(n).toLocaleString('id-ID')
 
 <style scoped>
 .admin-page { padding: 24px; max-width: 1100px; margin: 0 auto; }
-329|.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
+.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
 .admin-top h1 { font-size: 22px; font-weight: 700; color: var(--text-primary); }
-.admin-tabs { display: flex; gap: 4px; background: var(--border-light); padding: 4px; border-radius: 10px; }
-.admin-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; text-decoration: none; color: var(--text-muted); transition: all 0.15s; }
-.admin-tab.active, .admin-tab.router-link-exact-active { background: #fff; color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.admin-tab:hover { color: var(--text-secondary); }
-337|.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
 .admin-header h1 { font-size: 22px; font-weight: 700; }
 .header-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 .admin-header h1 { font-size: 22px; font-weight: 700; color: var(--text-primary); }
@@ -411,8 +401,7 @@ const fmtPrice = (n) => 'Rp ' + Number(n).toLocaleString('id-ID')
 @media (max-width: 768px) {
   .admin-page { padding: 16px 12px; }
   .page-title { font-size: 20px; }
-421|  .admin-tabs { gap: 8px; }
-424|  .form-row { grid-template-columns: 1fr; gap: 12px; }
+  .form-row { grid-template-columns: 1fr; gap: 12px; }
   .form-actions { flex-direction: column; }
   .form-actions button { width: 100%; }
   /* Table → card layout */

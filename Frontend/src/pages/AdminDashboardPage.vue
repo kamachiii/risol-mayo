@@ -166,15 +166,9 @@ onMounted(fetchOrders)
 
 <template>
   <div class="admin-page">
-170|    <div class="admin-top">
-      <div class="admin-tabs">
-        <router-link to="/admin" class="admin-tab active">Pesanan</router-link>
-        <router-link to="/admin/products" class="admin-tab">Produk</router-link>
-        <router-link to="/admin/users" class="admin-tab">User</router-link>
-        <router-link to="/admin/categories" class="admin-tab">Kategori</router-link>
-      </div>
+    <div class="admin-top">
     </div>
-180|    <div class="admin-header">
+    <div class="admin-header">
       <div>
         <h1 class="page-title">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -451,18 +445,13 @@ onMounted(fetchOrders)
 
 <style scoped>
 .admin-page { display: flex; flex-direction: column; gap: 16px; padding: 24px; max-width: 1100px; margin: 0 auto; }
-458|.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
-461|.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.admin-top { display: flex; align-items: center; margin-bottom: 16px; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .admin-header h1 { font-size: 22px; font-weight: 700; }
 .header-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 .page-title { display: flex; align-items: center; gap: 8px; font-size: 22px; font-weight: 700; color: var(--text-primary); margin: 0; }
 
 /* Tabs */
-468|.admin-tabs { display: flex; gap: 4px; background: var(--border-light); padding: 4px; border-radius: 10px; }
-.admin-tab { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; text-decoration: none; color: var(--text-muted); transition: all 0.15s; }
-.admin-tab.active, .admin-tab.router-link-exact-active { background: #fff; color: var(--brand); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.admin-tab:hover { color: var(--text-secondary); }
-474|
 /* Stats */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .stat-card { display: flex; align-items: center; gap: 12px; padding: 16px; cursor: pointer; transition: all 0.15s; border: 2px solid transparent; }
