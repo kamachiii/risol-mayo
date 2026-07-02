@@ -302,7 +302,7 @@ const fmtPrice = (n) => 'Rp ' + Number(n).toLocaleString('id-ID')
 
     <!-- Delete Confirm Modal -->
     <div v-if="showDeleteConfirm" class="modal-overlay" @click.self="cancelDelete">
-      <div class="modal-box delete-modal">
+      <div class="modal-card delete-modal">
         <h3>Hapus Produk</h3>
         <p>Yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.</p>
         <div class="modal-actions">
