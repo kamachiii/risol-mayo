@@ -1,0 +1,44 @@
+2026-05-14|kamachiii|Convert App.jsx → App.vue, setup router
+2026-05-14|abdulhakim89|Create LoginPage.vue
+2026-05-14|Asahihsan|Create HomePage.vue
+2026-05-14|FachriFadilah|Create Navbar.vue, Footer.vue
+2026-05-21|pidannnn|Create product store, api service
+2026-05-21|pidannnn|Create auth store, login logic
+2026-05-21|Asahihsan|Create ProductDetailPage.vue
+2026-05-21|FachriFadilah|Create Toast.vue component
+2026-05-22|pidannnn|Create useToast.js composable
+2026-05-28|Asahihsan|Create CartPage.vue
+2026-05-28|abdulhakim89|Create Admin layout (tab nav)
+2026-05-28|Asahihsan|Create CartSummary.vue, CartEmpty.vue
+2026-05-28|FachriFadilah|Create PaginationBar.vue
+2026-06-04|pidannnn|Create AdminProductsPage.vue
+2026-06-04|Asahihsan|Create OrderHistoryPage.vue
+2026-06-04|Asahihsan|Create order history logic
+2026-06-04|FachriFadilah|Create CheckoutPage.vue
+2026-06-04|abdulhakim89|Refine AdminDashboard (stats)
+2026-06-05|pidannnn|Create AdminUsersPage.vue
+2026-06-11|Asahihsan|Update logo
+2026-06-11|FachriFadilah|Add phone validation step
+2026-06-11|pidannnn|Add server-side category filter
+2026-06-18|Asahihsan|Replace CarouselBanner → HeroBanner
+2026-06-25|abdulhakim89|Fix #6 Diproses→Aktif
+2026-06-25|Asahihsan|Fix #8 category filter server-side
+2026-06-25|FachriFadilah|Fix #17 search overlap footer
+2026-07-02|abdulhakim89|Fix: sync package-lock.json for Railway deploy
+2026-07-02|FachriFadilah|Fix: add missing QRIS images to public folder
+2026-07-02|pidannnn|Fix: remove mock data fallback, show error when backend unavailable
+2026-07-02|abdulhakim89|Fix: fetch categories from database instead of hardcoding
+2026-07-02|FachriFadilah|Chore: ignore uploads and plan files
+2026-07-02|kamachiii|Fix: add vercel.json SPA rewrite for client-side routing
+2026-07-02|kamachiii|Feat: admin role restriction and login redirect
+2026-07-02|kamachiii|Docs: add development plan and project plan
+2026-07-02|kamachiii|Chore: add payment proof images from previous uploads
+2026-07-02|kamachiii|Feat: admin navbar shows navigation links instead of search bar
+2026-07-02|kamachiii|Style: polish admin navbar with icons and better styling
+2026-07-02|kamachiii|Prepare for production deploy (Vercel + Railway)
+2026-07-02|abdulhakim89|Fix: remove redundant admin tab navigation (navbar handles it)
+2026-07-02|Asahihsan|Fix: resolve relative image URLs to absolute backend URLs
+2026-07-02|kamachiii|Fix: order nesting and user_email mapping
+2026-07-02|kamachiii|Fix: remove duplicate 401 interceptor
+2026-07-02|kamachiii|Style: add missing CSS variables for admin pages
+2026-07-02|kamachiii|Add DB migration for orders table + payments columns
