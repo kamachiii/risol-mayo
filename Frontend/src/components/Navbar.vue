@@ -51,8 +51,16 @@ const handleLogout = () => {
         <img src="@/assets/logo.png" alt="Belanja.in" class="logo-img" />
       </router-link>
 
-      <!-- Search -->
-      <form class="navbar-search" @submit.prevent="handleSearch">
+      <!-- Search (customer only) / Admin Nav -->
+      <template v-if="auth.isAdmin">
+        <nav class="admin-nav">
+          <router-link to="/admin" class="admin-nav-link" active-class="active">Dashboard</router-link>
+          <router-link to="/admin/products" class="admin-nav-link" active-class="active">Produk</router-link>
+          <router-link to="/admin/categories" class="admin-nav-link" active-class="active">Kategori</router-link>
+          <router-link to="/admin/users" class="admin-nav-link" active-class="active">Users</router-link>
+        </nav>
+      </template>
+      <form v-else class="navbar-search" @submit.prevent="handleSearch">
         <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -168,6 +176,29 @@ const handleLogout = () => {
   height: 36px;
   width: auto;
   object-fit: contain;
+}
+
+/* ── Admin Nav ── */
+.admin-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.admin-nav-link {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: all .2s;
+}
+.admin-nav-link:hover {
+  background: rgba(99,168,179,.1);
+}
+.admin-nav-link.active {
+  background: var(--primary);
+  color: #fff;
 }
 
 /* ── Search ── */
