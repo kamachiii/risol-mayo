@@ -645,4 +645,18 @@ onMounted(fetchOrders)
   font-family: inherit; background: #fff; cursor: pointer; transition: border 0.2s;
 }
 .status-select:focus { border-color: #63A8B3; outline: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-page { padding: 16px; gap: 12px; }
+  .admin-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .filter-row { flex-wrap: wrap; }
+  .order-card { padding: 14px; }
+  .order-header { flex-direction: column; gap: 8px; }
+  .order-meta { flex-wrap: wrap; }
+  .order-items { flex-direction: column; }
+  .order-actions { flex-direction: column; align-items: flex-start; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
+}
 </style>

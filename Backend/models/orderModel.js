@@ -5,7 +5,7 @@ const OrderModel = {
   getAll(cb) {
     const sql = `
       SELECT o.id, o.status, o.total_amount, o.shipping_address,
-             o.payment_proof, o.created_at,
+             o.payment_proof, o.payment_method, o.bank_name, o.created_at,
              u.name AS user_name, u.email AS user_email
       FROM orders o
       JOIN users u ON o.user_id = u.id
@@ -37,6 +37,9 @@ const OrderModel = {
         o.status,
         o.total_amount,
         o.shipping_address,
+        o.payment_method,
+        o.bank_name,
+        o.payment_proof,
         o.created_at,
 
         oi.id AS order_item_id,

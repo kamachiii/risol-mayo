@@ -7,7 +7,6 @@ class ProductController {
   index(req, res) {
     const { search, page, limit, sort, category_id } = req.query;
         const opts = { search: search || '', page: Number(page) || 1, limit: Number(limit) || 50, sort: sort || 'newest', category_id };
-    console.log('[PRODUCT] getAll called', opts);
     Product.getAll(opts, (err, results) => {
       if (err) {
         console.error('[PRODUCT] DB error on getAll:', err.message);
@@ -20,7 +19,6 @@ class ProductController {
           return res.status(500).json({ status: "error", message: "Terjadi kesalahan pada server", data: null });
         }
         const total = countResult[0]?.total || 0;
-        console.log('[PRODUCT] getAll success, count:', results.length, 'total:', total);
         res.json({
           status: "success",
           message: "Berhasil ambil data",

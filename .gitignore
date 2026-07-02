@@ -23,3 +23,5 @@ Thumbs.db
 # Uploads (user files)
 uploads/*
 !uploads/.gitkeep
+
+_tmp*.txt
