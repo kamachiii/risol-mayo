@@ -4,15 +4,18 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const apiRoutes = require("./routes/api");
 const path = require("path");
+require("dotenv").config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 // Security headers
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "http://localhost:3000", "http://localhost:5173", "https:"],
+      imgSrc: ["'self'", "data:", "https:", "http:"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https:"],
       fontSrc: ["'self'", "https:"],
@@ -35,12 +38,22 @@ const authLimiter = rateLimit({
   skipSuccessfulRequests: true,
 });
 
+// CORS - allow frontend URL
+const allowedOrigins = [
+  FRONTEND_URL,
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:3000",
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000',
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
@@ -74,6 +87,6 @@ process.on("unhandledRejection", (reason) => {
   console.error("UNHANDLED REJECTION:", reason);
 });
 
-app.listen(3000, () => {
-  console.log("Server berjalan pada localhost:3000");
+app.listen(PORT, () => {
+  console.log(`Server berjalan pada port ${PORT}`);
 });
