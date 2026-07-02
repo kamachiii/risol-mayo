@@ -104,10 +104,7 @@ router.beforeEach((to) => {
   if (to.meta.requiresAdmin && !auth.isAdmin) {
     return { name: 'home' }
   }
-  // Admin only can access admin pages
-  if (auth.isAdmin && !to.meta.requiresAdmin && to.name !== 'login' && to.name !== 'not-found') {
-    return { name: 'admin' }
-  }
+
 })
 
 export default router
