@@ -54,10 +54,22 @@ const handleLogout = () => {
       <!-- Search (customer only) / Admin Nav -->
       <template v-if="auth.isAdmin">
         <nav class="admin-nav">
-          <router-link to="/admin" class="admin-nav-link" active-class="active">Dashboard</router-link>
-          <router-link to="/admin/products" class="admin-nav-link" active-class="active">Produk</router-link>
-          <router-link to="/admin/categories" class="admin-nav-link" active-class="active">Kategori</router-link>
-          <router-link to="/admin/users" class="admin-nav-link" active-class="active">Users</router-link>
+          <router-link to="/admin" class="admin-nav-link" active-class="active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </router-link>
+          <router-link to="/admin/products" class="admin-nav-link" active-class="active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            Produk
+          </router-link>
+          <router-link to="/admin/categories" class="admin-nav-link" active-class="active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4z"/><path d="M4 12h16v8H4z"/></svg>
+            Kategori
+          </router-link>
+          <router-link to="/admin/users" class="admin-nav-link" active-class="active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+            Users
+          </router-link>
         </nav>
       </template>
       <form v-else class="navbar-search" @submit.prevent="handleSearch">
@@ -181,24 +193,44 @@ const handleLogout = () => {
 /* ── Admin Nav ── */
 .admin-nav {
   display: flex;
-  gap: 4px;
+  gap: 2px;
   align-items: center;
+  background: var(--bg-secondary, #f8fafc);
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.06);
 }
 .admin-nav-link {
-  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--text);
+  color: #64748b;
   text-decoration: none;
-  transition: all .2s;
+  transition: all .15s ease;
+  white-space: nowrap;
+}
+.admin-nav-link svg {
+  opacity: .6;
+  transition: opacity .15s;
 }
 .admin-nav-link:hover {
-  background: rgba(99,168,179,.1);
+  color: var(--primary, #63A8B3);
+  background: rgba(99,168,179,.08);
+}
+.admin-nav-link:hover svg {
+  opacity: 1;
 }
 .admin-nav-link.active {
-  background: var(--primary);
+  background: var(--primary, #63A8B3);
   color: #fff;
+  box-shadow: 0 2px 8px rgba(99,168,179,.3);
+}
+.admin-nav-link.active svg {
+  opacity: 1;
 }
 
 /* ── Search ── */
